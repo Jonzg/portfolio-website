@@ -26,3 +26,7 @@ a {
 .card:hover {
     @apply transform scale-105;
 }
+
+.card:hover {
+  @apply shadow-xl translate-y-[-5px] transition-all duration-300;
+}
