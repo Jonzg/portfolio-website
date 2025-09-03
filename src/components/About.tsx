@@ -2,16 +2,68 @@ import React from 'react';
 
 const About: React.FC = () => {
     return (
-        <section id="about" className="py-10 px-5">
-            <h2 className="text-3xl font-bold mb-5">About Me</h2>
-            <p className="mb-4">
-                I am a passionate data scientist with a strong background in machine learning and artificial intelligence. 
-                My journey in this field has equipped me with the skills to analyze complex data and derive meaningful insights.
-            </p>
-            <p>
-                I enjoy solving challenging problems and continuously learning new technologies to enhance my skill set. 
-                My goal is to leverage data to drive decision-making and create impactful solutions.
-            </p>
+        <section id="about" className="py-20 bg-white">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-4xl mx-auto">
+                    <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">About Me</h2>
+                    <div className="bg-gray-50 rounded-2xl p-8 shadow-sm">
+                        <div className="space-y-8">
+                            <div className="prose prose-lg text-gray-600">
+                                <p className="leading-relaxed">
+                                    With a foundation in Physics and a Master's in Data Science, I bridge the gap between 
+                                    analytical thinking and practical problem-solving. My background provides me with a unique 
+                                    perspective on data analysis and machine learning applications.
+                                </p>
+                            </div>
+
+                            <div className="space-y-4">
+                                <h3 className="text-xl font-semibold text-gray-900">Core Expertise</h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                                        <div className="flex items-center space-x-3">
+                                            <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <h4 className="font-semibold text-gray-900">Machine Learning & Deep Learning</h4>
+                                        </div>
+                                    </div>
+                                    <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                                        <div className="flex items-center space-x-3">
+                                            <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <h4 className="font-semibold text-gray-900">Statistical Analysis</h4>
+                                        </div>
+                                    </div>
+                                    <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                                        <div className="flex items-center space-x-3">
+                                            <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <h4 className="font-semibold text-gray-900">Data Visualization</h4>
+                                        </div>
+                                    </div>
+                                    <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                                        <div className="flex items-center space-x-3">
+                                            <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <h4 className="font-semibold text-gray-900">Scientific Computing</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="prose prose-lg text-gray-600">
+                                <p className="leading-relaxed">
+                                    I am passionate about leveraging data to drive decision-making and create impactful solutions. 
+                                    My approach combines rigorous scientific methodology with practical business applications.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     );
 };
