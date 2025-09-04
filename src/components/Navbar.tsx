@@ -9,8 +9,8 @@ const Navbar: React.FC = () => {
 
     const menuItems = [
         { label: 'About', href: '#about' },
-        { label: 'Education', href: '#education' },
         { label: 'Experience', href: '#experience' },
+        { label: 'Education', href: '#education' },
         { label: 'Projects', href: '#projects' },
         { label: 'Contact', href: '#contact', isButton: true }
     ];
