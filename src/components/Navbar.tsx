@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Navbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -9,10 +9,26 @@ const Navbar: React.FC = () => {
 
     const menuItems = [
         { label: 'About', href: '#about' },
+        { label: 'Education', href: '#education' },
         { label: 'Experience', href: '#experience' },
         { label: 'Projects', href: '#projects' },
         { label: 'Contact', href: '#contact', isButton: true }
     ];
+
+    // Barra de progreso scroll
+    const [scrollProgress, setScrollProgress] = useState(0);
+    const progressRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            setScrollProgress(progress);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
         <nav className="fixed w-full bg-white bg-opacity-90 backdrop-blur-md shadow-lg z-50">
@@ -26,7 +42,6 @@ const Navbar: React.FC = () => {
                             JZ
                         </a>
                     </div>
-                    
                     {/* Desktop menu */}
                     <div className="hidden md:flex items-center space-x-1">
                         {menuItems.map((item) => (
@@ -43,7 +58,6 @@ const Navbar: React.FC = () => {
                             </a>
                         ))}
                     </div>
-
                     {/* Mobile menu button */}
                     <div className="md:hidden">
                         <button
@@ -65,7 +79,14 @@ const Navbar: React.FC = () => {
                     </div>
                 </div>
             </div>
-
+            {/* Barra de progreso scroll justo debajo de la navbar */}
+            <div className="w-full h-1 bg-transparent">
+                <div
+                    ref={progressRef}
+                    className="h-full bg-gradient-to-r from-blue-600 to-blue-400 transition-all duration-200"
+                    style={{ width: `${scrollProgress}%` }}
+                ></div>
+            </div>
             {/* Mobile menu */}
             <div 
                 className={`md:hidden transform transition-all duration-300 ease-in-out ${

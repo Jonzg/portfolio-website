@@ -11,9 +11,20 @@ const Hero: React.FC = () => {
                     <a href="#contact" className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:border-blue-500 hover:text-blue-600 transition duration-300">Contact Me</a>
                 </div>
                 <div className="mt-12 animate-bounce">
-                    <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
+                    <button
+                        aria-label="Scroll to About"
+                        onClick={() => {
+                            const aboutSection = document.getElementById('about');
+                            if (aboutSection) {
+                                aboutSection.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }}
+                        className="focus:outline-none"
+                    >
+                        <svg className="w-8 h-8 text-blue-500 hover:text-blue-700 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </section>

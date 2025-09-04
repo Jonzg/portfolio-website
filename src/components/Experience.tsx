@@ -1,5 +1,48 @@
 // src/components/Experience.tsx
-import React from 'react';
+
+import React, { useState } from 'react';
+
+// AccordionTasks para mostrar/ocultar tareas de Ayesa
+//
+// AccordionTasks para mostrar/ocultar tareas de Ayesa
+interface AccordionTasksProps {
+  tasks: Task[];
+}
+
+const AccordionTasks: React.FC<AccordionTasksProps> = ({ tasks }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="mt-2">
+      <button
+        className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-2 mb-2 focus:outline-none"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+      >
+        {open ? 'Hide details' : 'Show details'}
+        <svg className={`w-4 h-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {open && (
+        <div className="space-y-3">
+          <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Key Achievements</h4>
+          <ul className="space-y-3">
+            {tasks.map((task, taskIndex) => (
+              <li key={taskIndex} className="flex items-start space-x-3">
+                <svg className="w-5 h-5 text-blue-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+                <span className="text-gray-600 leading-relaxed">
+                  {task.description}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
 
 interface Task {
   description: string;
@@ -98,7 +141,13 @@ const Experience: React.FC = () => {
                       </p>
                     )}
 
-                    {exp.tasks && exp.tasks.length > 0 && (
+                    {/* Solo para Ayesa: mostrar tareas en un desplegable */}
+                    {exp.company === 'Ayesa' && exp.tasks && exp.tasks.length > 0 && (
+                      <AccordionTasks tasks={exp.tasks} />
+                    )}
+
+                    {/* Para el resto: mostrar tareas como antes si existen */}
+                    {exp.company !== 'Ayesa' && exp.tasks && exp.tasks.length > 0 && (
                       <div className="space-y-3">
                         <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">
                           Key Achievements

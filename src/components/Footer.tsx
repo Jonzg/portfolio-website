@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
                     <div className="text-center md:text-left space-y-4">
                         <h3 className="text-white font-bold text-xl mb-4 tracking-wide">Jon Zorrilla</h3>
                         <p className="text-base text-gray-400 leading-relaxed">
-                            Data Scientist & Machine Learning Engineer transforming data into actionable insights
+                            Data Scientist & Machine Learning Engineer Transforming data into actionable insights
                         </p>
                         <div className="flex justify-center md:justify-start space-x-4 pt-2">
                             <a 
