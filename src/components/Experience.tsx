@@ -52,38 +52,77 @@ const Experience: React.FC = () => {
   ];
 
   return (
-    <section id="experience" className="py-10 px-5 bg-gray-50">
-      <h2 className="text-3xl font-bold mb-8 text-center">Experience</h2>
-      <div className="space-y-8 max-w-4xl mx-auto">
-        {experiences.map((exp, idx) => (
-          <div key={idx} className="bg-white shadow-md rounded-lg p-6">
-            <h3 className="text-xl font-bold">
-              {exp.linkedin ? (
-                <a 
-                  href={exp.linkedin} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-blue-600 hover:text-blue-800 transition duration-300"
-                >
-                  {exp.company}
-                </a>
-              ) : (
-                exp.company
+    <section id="experience" className="py-20 bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Professional Experience</h2>
+        <div className="max-w-4xl mx-auto">
+          {experiences.map((exp, index) => (
+            <div key={index} className="relative mb-12 pl-8 md:pl-0">
+              {/* Timeline line */}
+              {index !== experiences.length - 1 && (
+                <div className="absolute left-0 md:left-1/2 h-full w-0.5 bg-gray-200 -translate-x-1/2"></div>
               )}
-            </h3>
-            <p className="italic">{exp.location}</p>
-            <p className="text-gray-700">{exp.position}</p>
-            <p className="text-gray-500 mb-4">{exp.years}</p>
-            {exp.description && <p className="mb-3">{exp.description}</p>}
-            {exp.tasks && exp.tasks.length > 0 && (
-              <ul className="list-disc list-inside space-y-2">
-                {exp.tasks.map((task, tid) => (
-                  <li key={tid}>{task.description}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ))}
+              
+              <div className={`md:flex items-start ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                {/* Timeline dot */}
+                <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-blue-600 rounded-full -translate-x-1/2 mt-1.5"></div>
+                
+                {/* Content */}
+                <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pl-12' : 'md:pr-12'}`}>
+                  <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-xl font-bold text-gray-900">{exp.position}</h3>
+                      <span className="text-sm font-medium text-gray-500">{exp.years}</span>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2 mb-4">
+                      <a
+                        href={exp.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        {exp.company}
+                      </a>
+                      {exp.location && (
+                        <>
+                          <span className="text-gray-400">•</span>
+                          <span className="text-gray-600">{exp.location}</span>
+                        </>
+                      )}
+                    </div>
+
+                    {exp.description && (
+                      <p className="text-gray-600 mb-4 leading-relaxed">
+                        {exp.description}
+                      </p>
+                    )}
+
+                    {exp.tasks && exp.tasks.length > 0 && (
+                      <div className="space-y-3">
+                        <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">
+                          Key Achievements
+                        </h4>
+                        <ul className="space-y-3">
+                          {exp.tasks.map((task, taskIndex) => (
+                            <li key={taskIndex} className="flex items-start space-x-3">
+                              <svg className="w-5 h-5 text-blue-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                              <span className="text-gray-600 leading-relaxed">
+                                {task.description}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
