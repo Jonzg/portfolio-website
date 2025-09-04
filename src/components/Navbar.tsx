@@ -68,8 +68,8 @@ const Navbar: React.FC = () => {
                                 key={item.label}
                                 href={item.href}
                                 className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${item.isButton
-                                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg ml-2'
-                                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                                    ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg ml-2'
+                                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                                     }`}
                             >
                                 {item.label}
@@ -115,8 +115,8 @@ const Navbar: React.FC = () => {
             </div>
             {/* Mobile menu */}
             <div
-                className={`md:hidden transform transition-all duration-300 ease-in-out ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-                    }`}
+                className={`md:hidden absolute top-20 left-0 w-full z-40 transition-all duration-300 ease-in-out ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                style={{ maxHeight: isOpen ? '60vh' : '0', overflowY: 'auto' }}
             >
                 <div className="px-4 py-3 space-y-1 bg-white shadow-lg rounded-b-2xl">
                     {menuItems.map((item) => (
@@ -124,10 +124,10 @@ const Navbar: React.FC = () => {
                             key={item.label}
                             href={item.href}
                             className={`block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ${item.isButton
-                                    ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg mt-4'
-                                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                                ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg mt-4'
+                                : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                                 }`}
-                            onClick={toggleMenu}
+                            onClick={() => setIsOpen(false)}
                         >
                             {item.label}
                         </a>
@@ -135,7 +135,7 @@ const Navbar: React.FC = () => {
                     {/* Language Switcher Mobile */}
                     <button
                         className="mt-2 px-3 py-1 rounded-full border border-gray-300 text-sm font-medium bg-white hover:bg-gray-100 transition-colors duration-300 w-full"
-                        onClick={() => { setLanguage(language === 'en' ? 'es' : 'en'); toggleMenu(); }}
+                        onClick={() => { setLanguage(language === 'en' ? 'es' : 'en'); setIsOpen(false); }}
                         aria-label="Cambiar idioma"
                     >
                         {language === 'en' ? 'ES' : 'EN'}
