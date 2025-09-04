@@ -1,18 +1,37 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+
+const menuLabels = {
+    en: {
+        about: 'About',
+        experience: 'Experience',
+        education: 'Education',
+        projects: 'Projects',
+        contact: 'Contact',
+    },
+    es: {
+        about: 'Sobre mí',
+        experience: 'Experiencia',
+        education: 'Educación',
+        projects: 'Proyectos',
+        contact: 'Contacto',
+    }
+};
 
 const Navbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { language, setLanguage } = useLanguage();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
     const menuItems = [
-        { label: 'About', href: '#about' },
-        { label: 'Experience', href: '#experience' },
-        { label: 'Education', href: '#education' },
-        { label: 'Projects', href: '#projects' },
-        { label: 'Contact', href: '#contact', isButton: true }
+        { label: menuLabels[language].about, href: '#about' },
+        { label: menuLabels[language].experience, href: '#experience' },
+        { label: menuLabels[language].education, href: '#education' },
+        { label: menuLabels[language].projects, href: '#projects' },
+        { label: menuLabels[language].contact, href: '#contact', isButton: true }
     ];
 
     // Barra de progreso scroll
@@ -35,8 +54,8 @@ const Navbar: React.FC = () => {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     <div className="flex-shrink-0">
-                        <a 
-                            href="#" 
+                        <a
+                            href="#"
                             className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent hover:from-blue-500 hover:to-blue-300 transition-all duration-300"
                         >
                             JZ
@@ -48,15 +67,22 @@ const Navbar: React.FC = () => {
                             <a
                                 key={item.label}
                                 href={item.href}
-                                className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-                                    item.isButton
+                                className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${item.isButton
                                         ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg ml-2'
                                         : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-                                }`}
+                                    }`}
                             >
                                 {item.label}
                             </a>
                         ))}
+                        {/* Language Switcher */}
+                        <button
+                            className="ml-4 px-3 py-1 rounded-full border border-gray-300 text-sm font-medium bg-white hover:bg-gray-100 transition-colors duration-300"
+                            onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
+                            aria-label="Cambiar idioma"
+                        >
+                            {language === 'en' ? 'ES' : 'EN'}
+                        </button>
                     </div>
                     {/* Mobile menu button */}
                     <div className="md:hidden">
@@ -88,26 +114,32 @@ const Navbar: React.FC = () => {
                 ></div>
             </div>
             {/* Mobile menu */}
-            <div 
-                className={`md:hidden transform transition-all duration-300 ease-in-out ${
-                    isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-                }`}
+            <div
+                className={`md:hidden transform transition-all duration-300 ease-in-out ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+                    }`}
             >
                 <div className="px-4 py-3 space-y-1 bg-white shadow-lg rounded-b-2xl">
                     {menuItems.map((item) => (
-                        <a 
+                        <a
                             key={item.label}
                             href={item.href}
-                            className={`block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ${
-                                item.isButton
+                            className={`block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ${item.isButton
                                     ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg mt-4'
                                     : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-                            }`}
+                                }`}
                             onClick={toggleMenu}
                         >
                             {item.label}
                         </a>
                     ))}
+                    {/* Language Switcher Mobile */}
+                    <button
+                        className="mt-2 px-3 py-1 rounded-full border border-gray-300 text-sm font-medium bg-white hover:bg-gray-100 transition-colors duration-300 w-full"
+                        onClick={() => { setLanguage(language === 'en' ? 'es' : 'en'); toggleMenu(); }}
+                        aria-label="Cambiar idioma"
+                    >
+                        {language === 'en' ? 'ES' : 'EN'}
+                    </button>
                 </div>
             </div>
         </nav>

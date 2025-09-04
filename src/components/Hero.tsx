@@ -1,22 +1,39 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
+
+const heroTexts = {
+    en: {
+        name: 'Jon Zorrilla Gamboa',
+        title: 'Data Scientist | Machine Learning Engineer',
+        viewProjects: 'View Projects',
+        contactMe: 'Contact Me',
+    },
+    es: {
+        name: 'Jon Zorrilla Gamboa',
+        title: 'Científico de Datos | Ingeniero de Machine Learning',
+        viewProjects: 'Ver Proyectos',
+        contactMe: 'Contáctame',
+    }
+};
 
 const Hero: React.FC = () => {
+    const { language } = useLanguage();
     return (
         <section className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-50 to-white text-center p-6">
             <div className="space-y-6">
-                <h1 className="text-6xl font-extrabold text-gray-900 tracking-tight">Jon Zorrilla Gamboa</h1>
-                <p className="text-xl text-gray-600 font-light tracking-wide">Data Scientist | Machine Learning Engineer</p>
+                <h1 className="text-6xl font-extrabold text-gray-900 tracking-tight">{heroTexts[language].name}</h1>
+                <p className="text-xl text-gray-600 font-light tracking-wide">{heroTexts[language].title}</p>
                 <div className="flex justify-center gap-4 mt-8">
                     <a href="#projects" className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 shadow-lg hover:shadow-xl">
-                        View Projects
+                        {heroTexts[language].viewProjects}
                     </a>
                     <a href="#contact" className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:border-blue-500 hover:text-blue-600 transition duration-300">
-                        Contact Me
+                        {heroTexts[language].contactMe}
                     </a>
                 </div>
                 <div className="mt-12 animate-bounce">
                     <button
-                        aria-label="Scroll to About"
+                        aria-label={language === 'en' ? 'Scroll to About' : 'Ir a Sobre mí'}
                         onClick={() => {
                             const aboutSection = document.getElementById('about');
                             if (aboutSection) {
