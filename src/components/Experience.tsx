@@ -1,6 +1,6 @@
 // src/components/Experience.tsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 const tasksAyesa = {
@@ -25,7 +25,7 @@ const experienceData = {
       linkedin: 'https://www.linkedin.com/company/ayesa/',
       position: 'Data Scientist at the Ibermática Innovation Institute (i3B)',
       location: 'Greater Bilbao metropolitan area',
-      years: 'Feb 2024 - Present',
+      years: 'Feb 2024 – Present',
       description: 'Participation in R&D projects in applied Artificial Intelligence at national and European level. Research tasks in new algorithms and innovative proposals, data analysis and processing, experimentation and creation of predictive models and visualisation and communication of results.',
       tasks: tasksAyesa.en.map(description => ({ description })),
     },
@@ -34,7 +34,7 @@ const experienceData = {
       linkedin: 'https://www.linkedin.com/company/hubbellincorporated/',
       position: 'Research Data Scientist',
       location: 'Bilbao',
-      years: 'Oct 2023 - Feb 2024',
+      years: 'Oct 2023 – Feb 2024',
       description: 'Development of my Master\'s Thesis in Data Science: "Advanced Metering Infrastructure-oriented data imputation through machine learning techniques", with the objective of studying and imputing missing values in smart meter time series using ML models applied to real data from the electricity sector.',
       tasks: [],
     },
@@ -43,7 +43,7 @@ const experienceData = {
       linkedin: 'https://www.linkedin.com/company/edp/',
       position: 'Data Scientist',
       location: 'Bilbao',
-      years: 'Apr 2022 - Jul 2022',
+      years: 'Apr 2022 – Jul 2022',
       description: 'Extracurricular internship in the Business Intelligence and Big Data department of EDP Energy. Creation and optimisation of ML models applied to commercial energy businesses and research into new Open Data systems.',
       tasks: [],
     },
@@ -54,7 +54,7 @@ const experienceData = {
       linkedin: 'https://www.linkedin.com/company/ayesa/',
       position: 'Científico de datos en el Instituto de Ibermática de Innovación (i3B)',
       location: 'Bilbao',
-      years: 'Feb 2024 - Ahora',
+      years: 'Feb 2024 – Actualidad',
       description: 'Participación en proyectos de I+D de inteligencia artificial aplicada de escala nacional y europea. Tareas de investigación en nuevos algoritmos y propuestas innovativas, análisis y procesamiento de datos, experimentación y creación de modelos de predicción y visualización y comunicación de resultados.',
       tasks: tasksAyesa.es.map(description => ({ description })),
     },
@@ -63,7 +63,7 @@ const experienceData = {
       linkedin: 'https://www.linkedin.com/company/hubbellincorporated/',
       position: 'Científico de datos',
       location: 'Bilbao',
-      years: 'Oct 2023 - Feb 2024',
+      years: 'Oct 2023 – Feb 2024',
       description: 'Desarrollo de mi Trabajo de Fin de Máster en Ciencia de Datos: "Advanced Metering Infrastructure-oriented data imputation through machine learning techniques", con el objetivo de estudiar e imputar valores faltantes en series temporales de smart meters mediante modelos de ML aplicados a datos reales del sector eléctrico.',
       tasks: [],
     },
@@ -72,7 +72,7 @@ const experienceData = {
       linkedin: 'https://www.linkedin.com/company/edp/',
       position: 'Científico de datos',
       location: 'Bilbao',
-      years: 'Abr 2022 - Jul 2022',
+      years: 'Abr 2022 – Jul 2022',
       description: 'Prácticas extracurriculares en el departamento de Inteligencia de negocio y Big Data de EDP Energía. Creación y optimización de modelos de ML aplicado a negocios comerciales de energía e investigación de nuevos sistemas Open Data.',
       tasks: [],
     },
@@ -80,17 +80,17 @@ const experienceData = {
 };
 
 const sectionTitles = {
-  en: 'Professional Experience',
-  es: 'Experiencia Profesional',
+  en: 'Experience',
+  es: 'Experiencia',
 };
 
 const AccordionTasks: React.FC<{ tasks: { description: string }[] }> = ({ tasks }) => {
   const [open, setOpen] = useState(false);
   const { language } = useLanguage();
   return (
-    <div className="mt-2">
+    <div className="mt-4">
       <button
-        className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-2 mb-2 focus:outline-none"
+        className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 text-sm font-medium flex items-center gap-2 mb-3 focus:outline-none transition-colors duration-200"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
       >
@@ -100,17 +100,14 @@ const AccordionTasks: React.FC<{ tasks: { description: string }[] }> = ({ tasks 
         </svg>
       </button>
       {open && (
-        <div className="space-y-3">
-          <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">{language === 'en' ? 'Projects' : 'Proyectos'}</h4>
+        <div className="space-y-3 border-l border-zinc-300 dark:border-zinc-700 pl-4">
+          <p className="text-xs font-mono text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-2">
+            {language === 'en' ? 'Projects' : 'Proyectos'}
+          </p>
           <ul className="space-y-3">
             {tasks.map((task, taskIndex) => (
-              <li key={taskIndex} className="flex items-start space-x-3">
-                <svg className="w-5 h-5 text-blue-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-                <span className="text-gray-600 leading-relaxed">
-                  {task.description}
-                </span>
+              <li key={taskIndex} className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                {task.description}
               </li>
             ))}
           </ul>
@@ -123,83 +120,60 @@ const AccordionTasks: React.FC<{ tasks: { description: string }[] }> = ({ tasks 
 const Experience: React.FC = () => {
   const { language } = useLanguage();
   const experiences = experienceData[language];
+  const revealRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = revealRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) el.classList.add('visible'); },
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="experience" className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">{sectionTitles[language]}</h2>
-        <div className="max-w-4xl mx-auto">
-          {experiences.map((exp, index) => (
-            <div key={index} className="relative mb-12 pl-8 md:pl-0">
-              {/* Timeline line */}
-              {index !== experiences.length - 1 && (
-                <div className="absolute left-0 md:left-1/2 h-full w-0.5 bg-gray-200 -translate-x-1/2"></div>
-              )}
-
-              <div className={`md:flex items-start ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                {/* Timeline dot */}
-                <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-blue-600 rounded-full -translate-x-1/2 mt-1.5"></div>
-
-                {/* Content */}
-                <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pl-12' : 'md:pr-12'}`}>
-                  <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl font-bold text-gray-900">{exp.position}</h3>
-                      <span className="text-sm font-medium text-gray-500">{exp.years}</span>
-                    </div>
-
-                    <div className="flex items-center space-x-2 mb-4">
-                      <a
-                        href={exp.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 font-medium"
-                      >
-                        {exp.company}
-                      </a>
-                      {exp.location && (
-                        <>
-                          <span className="text-gray-400">•</span>
-                          <span className="text-gray-600">{exp.location}</span>
-                        </>
-                      )}
-                    </div>
-
-                    {exp.description && (
-                      <p className="text-gray-600 mb-4 leading-relaxed">
-                        {exp.description}
-                      </p>
-                    )}
-
-                    {/* Solo para Ayesa: mostrar tareas en un desplegable */}
-                    {exp.company === 'Ayesa' && exp.tasks && exp.tasks.length > 0 && (
-                      <AccordionTasks tasks={exp.tasks} />
-                    )}
-
-                    {/* Para el resto: mostrar tareas como antes si existen */}
-                    {exp.company !== 'Ayesa' && exp.tasks && exp.tasks.length > 0 && (
-                      <div className="space-y-3">
-                        <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">
-                          {language === 'en' ? 'Projects' : 'Proyectos'}
-                        </h4>
-                        <ul className="space-y-3">
-                          {exp.tasks.map((task, taskIndex) => (
-                            <li key={taskIndex} className="flex items-start space-x-3">
-                              <svg className="w-5 h-5 text-blue-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                              </svg>
-                              <span className="text-gray-600 leading-relaxed">
-                                {task.description}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
+    <section id="experience" className="py-24 border-t border-zinc-200 dark:border-zinc-800">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div ref={revealRef} className="reveal">
+          <h2 className="text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-50 mb-12">
+            {sectionTitles[language]}
+          </h2>
+          <div className="space-y-6">
+            {experiences.map((exp, index) => (
+              <div key={index} className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors duration-300">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
+                  <h3 className="text-zinc-900 dark:text-zinc-50 font-semibold leading-snug">{exp.position}</h3>
+                  <span className="text-xs font-mono text-zinc-400 dark:text-zinc-500 whitespace-nowrap">{exp.years}</span>
                 </div>
+                <div className="flex items-center gap-2 mb-4">
+                  <a
+                    href={exp.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 text-sm font-medium transition-colors duration-200"
+                  >
+                    {exp.company}
+                  </a>
+                  {exp.location && (
+                    <>
+                      <span className="text-zinc-400 dark:text-zinc-700">·</span>
+                      <span className="text-zinc-500 text-sm">{exp.location}</span>
+                    </>
+                  )}
+                </div>
+                {exp.description && (
+                  <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                    {exp.description}
+                  </p>
+                )}
+                {exp.company === 'Ayesa' && exp.tasks && exp.tasks.length > 0 && (
+                  <AccordionTasks tasks={exp.tasks} />
+                )}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

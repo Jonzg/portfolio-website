@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 const educationData = {
   en: [
     {
-      university: 'Universidad Autónoma de Madrid, Madrid',
+      university: 'Universidad Autónoma de Madrid',
+      location: 'Madrid',
       degree: 'M.S. in Data Science',
-      years: '2022 - 2024',
+      years: '2022 – 2024',
       details: [
         'Machine learning, deep learning, reinforcement learning',
         'Time series analysis, NLP, advanced statistics',
@@ -14,9 +15,10 @@ const educationData = {
       ],
     },
     {
-      university: 'Universidad del País Vasco, Bilbao',
+      university: 'Universidad del País Vasco',
+      location: 'Bilbao',
       degree: 'B.S. in Physics',
-      years: '2018 - 2022',
+      years: '2018 – 2022',
       details: [
         'Linear algebra, calculus, statistics, probability',
         'Differential equations, numerical computation',
@@ -25,19 +27,21 @@ const educationData = {
   ],
   es: [
     {
-      university: 'Universidad Autónoma de Madrid, Madrid',
+      university: 'Universidad Autónoma de Madrid',
+      location: 'Madrid',
       degree: 'Máster en Ciencia de Datos',
-      years: '2022 - 2024',
+      years: '2022 – 2024',
       details: [
         'Machine learning, deep learning, aprendizaje por refuerzo',
-        'Análisis de series temporales, Procesamiento de Lenguaje Natural, análisis estadístico avanzado',
+        'Análisis de series temporales, NLP, análisis estadístico avanzado',
         'Visión por ordenador y programación avanzada',
       ],
     },
     {
-      university: 'Universidad del País Vasco, Bilbao',
-      degree: 'Grado en física',
-      years: '2018 - 2022',
+      university: 'Universidad del País Vasco',
+      location: 'Bilbao',
+      degree: 'Grado en Física',
+      years: '2018 – 2022',
       details: [
         'Álgebra lineal, cálculo, estadística, probabilidad',
         'Ecuaciones diferenciales y computación numérica',
@@ -50,13 +54,13 @@ const coursesCerts = {
   en: [
     {
       name: 'Generative AI with Large Language Models',
-      org: 'Coursera (AWS & DeepLearning.AI)',
+      org: 'Coursera – AWS & DeepLearning.AI',
       year: '2025',
       link: 'https://www.coursera.org/learn/generative-ai-with-llms/',
     },
     {
       name: 'Machine Learning in Production',
-      org: 'Coursera (DeepLearning.AI)',
+      org: 'Coursera – DeepLearning.AI',
       year: '2025',
       link: 'https://www.coursera.org/learn/introduction-to-machine-learning-in-production/',
     },
@@ -64,13 +68,13 @@ const coursesCerts = {
   es: [
     {
       name: 'IA Generativa con Modelos Grandes de Lenguaje (LLMs)',
-      org: 'Coursera (AWS & DeepLearning.AI)',
+      org: 'Coursera – AWS & DeepLearning.AI',
       year: '2025',
       link: 'https://www.coursera.org/learn/generative-ai-with-llms/',
     },
     {
       name: 'Machine Learning en Producción',
-      org: 'Coursera (DeepLearning.AI)',
+      org: 'Coursera – DeepLearning.AI',
       year: '2025',
       link: 'https://www.coursera.org/learn/introduction-to-machine-learning-in-production/',
     },
@@ -80,121 +84,106 @@ const coursesCerts = {
 const languages = {
   en: [
     { name: 'Spanish', level: 'Native' },
-    { name: 'English', level: 'Cambridge Advanced Exam (C1)' },
+    { name: 'English', level: 'Cambridge Advanced (C1)' },
     { name: 'Basque', level: 'Advanced (B2)' },
   ],
   es: [
     { name: 'Español', level: 'Nativo' },
-    { name: 'Inglés', level: 'Cambridge Advanced Exam (C1)' },
+    { name: 'Inglés', level: 'Cambridge Advanced (C1)' },
     { name: 'Euskera', level: 'Avanzado (B2)' },
   ],
 };
 
-const skills = {
-  en: [
-    '🐍 Python, 📊 R, 🗄️ SQL, 🧮 Fortran',
-    '🤖 ML & DL: Numpy, Pandas, SKLearn, Boosting, PyTorch, TensorFlow, PySpark, Matplotlib, Seaborn',
-    '☁️ Cloud: Azure',
-    '🚀 Deployment: Git, MLFlow, FastAPI',
-    '🛠️ Other: LaTeX, OpenCV, Matlab, SAS, PowerBI, Microsoft Office',
-  ],
-  es: [
-    '🐍 Python, 📊 R, 🗄️ SQL, 🧮 Fortran',
-    '🤖 ML y DL: Numpy, Pandas, SKLearn, Boosting, PyTorch, TensorFlow, PySpark, Matplotlib, Seaborn',
-    '☁️ Cloud: Azure',
-    '🚀 Despliegue: Git, MLFlow, FastAPI',
-    '🛠️ Otros: LaTeX, OpenCV, Matlab, SAS, PowerBI, Microsoft Office',
-  ],
-};
-
-const sectionTitles = {
-  en: 'Education & Certifications',
-  es: 'Formación y Certificaciones',
-};
-
-const coursesTitle = {
-  en: 'Courses & Certifications',
-  es: 'Cursos y Certificaciones',
-};
-
-const languagesTitle = {
-  en: 'Languages',
-  es: 'Idiomas',
-};
-
-const skillsTitle = {
-  en: 'Skills',
-  es: 'Competencias',
+const labels = {
+  en: {
+    sectionTitle: 'Education',
+    certs: 'Courses & Certifications',
+    langs: 'Languages',
+  },
+  es: {
+    sectionTitle: 'Formación',
+    certs: 'Cursos y Certificaciones',
+    langs: 'Idiomas',
+  },
 };
 
 const Education: React.FC = () => {
   const { language } = useLanguage();
+  const l = labels[language];
+  const revealRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = revealRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) el.classList.add('visible'); },
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="education" className="py-20 bg-white">
-      <div className="max-w-4xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-gray-900 text-center mb-12">
-          {sectionTitles[language]}
-        </h2>
-        <div className="space-y-8">
-          {educationData[language].map((edu, idx) => (
-            <div key={idx} className="bg-gray-50 rounded-xl p-6 shadow-sm">
-              <h3 className="text-xl font-semibold text-blue-700 mb-2">
-                {edu.university}
-              </h3>
-              <p className="text-gray-700 font-medium mb-1">
-                {edu.degree}{' '}
-                <span className="text-gray-500">({edu.years})</span>
-              </p>
-              <ul className="list-disc list-inside text-gray-600 text-base ml-4">
-                {edu.details.map((d, i) => (
-                  <li key={i}>{d}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-          <div className="bg-gray-50 rounded-xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-blue-700 mb-2">
-              {coursesTitle[language]}
-            </h3>
-            <ul className="list-disc list-inside text-gray-600 text-base ml-4">
+    <section id="education" className="py-24 border-t border-zinc-200 dark:border-zinc-800">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div ref={revealRef} className="reveal">
+          <h2 className="text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-50 mb-12">
+            {l.sectionTitle}
+          </h2>
+
+          {/* Degrees */}
+          <div className="space-y-4 mb-8">
+            {educationData[language].map((edu, idx) => (
+              <div key={idx} className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors duration-300">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-2">
+                  <div>
+                    <h3 className="text-zinc-900 dark:text-zinc-50 font-semibold">{edu.degree}</h3>
+                    <p className="text-blue-600 dark:text-blue-400 text-sm mt-0.5">{edu.university} · {edu.location}</p>
+                  </div>
+                  <span className="text-xs font-mono text-zinc-400 dark:text-zinc-500 whitespace-nowrap">{edu.years}</span>
+                </div>
+                <ul className="mt-3 space-y-1">
+                  {edu.details.map((d, i) => (
+                    <li key={i} className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed before:content-['—'] before:mr-2 before:text-zinc-400 dark:before:text-zinc-700">
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Certifications */}
+          <div className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 mb-8 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors duration-300">
+            <h3 className="text-zinc-900 dark:text-zinc-50 font-semibold mb-4">{l.certs}</h3>
+            <ul className="space-y-3">
               {coursesCerts[language].map((course, idx) => (
-                <li key={idx}>
-                  {course.name} –{' '}
+                <li key={idx} className="flex flex-col sm:flex-row sm:items-baseline gap-1">
+                  <span className="text-zinc-700 dark:text-zinc-300 text-sm">{course.name}</span>
+                  <span className="text-zinc-400 dark:text-zinc-700 hidden sm:inline">·</span>
                   <a
                     href={course.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline"
+                    className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 text-sm transition-colors duration-200"
                   >
                     {course.org}
-                  </a>{' '}
-                  <span className="text-gray-500">{course.year}</span>
+                  </a>
+                  <span className="text-zinc-400 dark:text-zinc-600 text-xs font-mono">{course.year}</span>
                 </li>
               ))}
             </ul>
           </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
-          <div className="bg-gray-50 rounded-xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-blue-700 mb-4">
-              {languagesTitle[language]}
-            </h3>
-            <ul className="space-y-2 text-gray-700">
+
+          {/* Languages */}
+          <div className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors duration-300">
+            <h3 className="text-zinc-900 dark:text-zinc-50 font-semibold mb-4">{l.langs}</h3>
+            <ul className="space-y-2">
               {languages[language].map((lang, idx) => (
-                <li key={idx}>
-                  {' '}
-                  <span className="font-medium">{lang.name}:</span> {lang.level}
+                <li key={idx} className="flex items-center gap-3 text-sm">
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium w-20">{lang.name}</span>
+                  <span className="text-zinc-500">{lang.level}</span>
                 </li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-gray-50 rounded-xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-blue-700 mb-4">
-              {skillsTitle[language]}
-            </h3>
-            <ul className="space-y-2 text-gray-700">
-              {skills[language].map((skill, idx) => (
-                <li key={idx}>{skill}</li>
               ))}
             </ul>
           </div>

@@ -1,24 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { LanguageProvider } from './context/LanguageContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import Education from './components/Education';
 import Experience from './components/Experience';
+import Education from './components/Education';
 import Projects from './components/Projects';
+import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 const App: React.FC = () => {
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+  }, []);
+
   return (
     <LanguageProvider>
-      <div className="bg-white text-gray-800">
+      <div className="min-h-screen">
         <Navbar />
         <Hero />
         <About />
         <Experience />
         <Education />
         <Projects />
+        <Skills />
         <Contact />
         <Footer />
       </div>
