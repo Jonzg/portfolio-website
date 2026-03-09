@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
     }, []);
 
     return (
-        <nav className="fixed w-full bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 z-50">
+        <nav className="fixed w-full bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 z-50">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex-shrink-0">

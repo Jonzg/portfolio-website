@@ -76,22 +76,26 @@ const projects: Project[] = [
     },
 ];
 
-const typeConfig: Record<Project['type'], { label: { en: string; es: string }; color: string }> = {
+const typeConfig: Record<Project['type'], { label: { en: string; es: string }; badge: string; accent: string }> = {
     'process-mining': {
         label: { en: 'Process Mining', es: 'Process Mining' },
-        color: 'text-violet-400 bg-violet-950 border-violet-800',
+        badge: 'text-violet-400 bg-violet-950/60 border-violet-800/60',
+        accent: 'border-l-violet-500',
     },
     'anomaly-detection': {
         label: { en: 'Anomaly Detection', es: 'Detección de Anomalías' },
-        color: 'text-amber-400 bg-amber-950 border-amber-800',
+        badge: 'text-amber-400 bg-amber-950/60 border-amber-800/60',
+        accent: 'border-l-amber-500',
     },
     'classification': {
         label: { en: 'Classification', es: 'Clasificación' },
-        color: 'text-blue-400 bg-blue-950 border-blue-800',
+        badge: 'text-blue-400 bg-blue-950/60 border-blue-800/60',
+        accent: 'border-l-blue-500',
     },
     'mlops-api': {
         label: { en: 'MLOps / API', es: 'MLOps / API' },
-        color: 'text-emerald-400 bg-emerald-950 border-emerald-800',
+        badge: 'text-emerald-400 bg-emerald-950/60 border-emerald-800/60',
+        accent: 'border-l-emerald-500',
     },
 };
 
@@ -127,44 +131,44 @@ const Projects: React.FC = () => {
     }, []);
 
     return (
-        <section id="projects" className="py-24 border-t border-zinc-200 dark:border-zinc-800">
+        <section id="projects" className="py-24 border-t border-zinc-800">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div ref={revealRef} className="reveal">
-                    <h2 className="text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-50 mb-12">
+                    <h2 className="text-3xl font-mono font-bold text-zinc-50 mb-12">
                         {l.sectionTitle}
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {projects.map((project, index) => {
                             const cfg = typeConfig[project.type];
                             return (
                                 <div
                                     key={index}
-                                    className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 flex flex-col hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors duration-300"
+                                    className={`group bg-zinc-900/50 border border-zinc-800 border-l-4 ${cfg.accent} rounded-lg p-6 flex flex-col hover:bg-zinc-900 hover:border-zinc-700 hover:shadow-xl hover:shadow-zinc-950/50 transition-all duration-300 cursor-default`}
                                 >
                                     <div className="flex items-start justify-between gap-3 mb-4">
-                                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-mono border ${cfg.color}`}>
+                                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono border ${cfg.badge}`}>
                                             {cfg.label[language]}
                                         </span>
-                                        <span className="text-xs font-mono text-zinc-400 dark:text-zinc-600 border border-zinc-200 dark:border-zinc-800 rounded px-2 py-0.5">
+                                        <span className="text-xs font-mono text-zinc-600 border border-zinc-800 rounded px-2 py-0.5">
                                             {l.confidential}
                                         </span>
                                     </div>
-                                    <h3 className="text-zinc-900 dark:text-zinc-50 font-semibold text-base leading-snug mb-4">
+                                    <h3 className="text-zinc-50 font-semibold text-base leading-snug mb-4">
                                         {project.title[language]}
                                     </h3>
                                     <div className="space-y-3 flex-1">
                                         <div>
-                                            <p className="text-xs font-mono text-zinc-400 dark:text-zinc-600 uppercase tracking-widest mb-1">{l.problem}</p>
-                                            <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">{project.problem[language]}</p>
+                                            <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest mb-1">{l.problem}</p>
+                                            <p className="text-zinc-400 text-sm leading-relaxed">{project.problem[language]}</p>
                                         </div>
                                         <div>
-                                            <p className="text-xs font-mono text-zinc-400 dark:text-zinc-600 uppercase tracking-widest mb-1">{l.approach}</p>
-                                            <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">{project.approach[language]}</p>
+                                            <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest mb-1">{l.approach}</p>
+                                            <p className="text-zinc-400 text-sm leading-relaxed">{project.approach[language]}</p>
                                         </div>
                                     </div>
-                                    <div className="mt-5 flex flex-wrap gap-2">
+                                    <div className="mt-5 flex flex-wrap gap-1.5">
                                         {project.technologies.map((tech, i) => (
-                                            <span key={i} className="tag text-xs">
+                                            <span key={i} className="tag">
                                                 {tech}
                                             </span>
                                         ))}

@@ -134,37 +134,37 @@ const Experience: React.FC = () => {
   }, []);
 
   return (
-    <section id="experience" className="py-24 border-t border-zinc-200 dark:border-zinc-800">
+    <section id="experience" className="py-24 border-t border-zinc-800">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={revealRef} className="reveal">
-          <h2 className="text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-50 mb-12">
+          <h2 className="text-3xl font-mono font-bold text-zinc-50 mb-12">
             {sectionTitles[language]}
           </h2>
-          <div className="space-y-6">
+          <div className="space-y-4">
             {experiences.map((exp, index) => (
-              <div key={index} className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors duration-300">
+              <div key={index} className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:border-zinc-700 hover:bg-zinc-900 transition-all duration-300">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
-                  <h3 className="text-zinc-900 dark:text-zinc-50 font-semibold leading-snug">{exp.position}</h3>
-                  <span className="text-xs font-mono text-zinc-400 dark:text-zinc-500 whitespace-nowrap">{exp.years}</span>
+                  <h3 className="text-zinc-50 font-semibold leading-snug">{exp.position}</h3>
+                  <span className="text-xs font-mono text-zinc-500 whitespace-nowrap">{exp.years}</span>
                 </div>
                 <div className="flex items-center gap-2 mb-4">
                   <a
                     href={exp.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 text-sm font-medium transition-colors duration-200"
+                    className="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors duration-200 cursor-pointer"
                   >
                     {exp.company}
                   </a>
                   {exp.location && (
                     <>
-                      <span className="text-zinc-400 dark:text-zinc-700">·</span>
+                      <span className="text-zinc-700">·</span>
                       <span className="text-zinc-500 text-sm">{exp.location}</span>
                     </>
                   )}
                 </div>
                 {exp.description && (
-                  <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                  <p className="text-zinc-400 text-sm leading-relaxed">
                     {exp.description}
                   </p>
                 )}

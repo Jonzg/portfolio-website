@@ -6,36 +6,44 @@ const skillCategories = {
         {
             title: 'Languages',
             items: ['Python', 'R', 'SQL', 'Fortran'],
+            accent: 'bg-blue-500',
         },
         {
             title: 'ML / Data Science',
             items: ['NumPy', 'Pandas', 'scikit-learn', 'CatBoost', 'LightGBM', 'H2O AutoML', 'Optuna', 'PyTorch', 'TensorFlow', 'PySpark', 'pm4py', 'Matplotlib', 'Seaborn'],
+            accent: 'bg-violet-500',
         },
         {
             title: 'MLOps / Deployment',
             items: ['MLflow', 'FastAPI', 'Git', 'Azure', 'Docker'],
+            accent: 'bg-emerald-500',
         },
         {
             title: 'Tools',
             items: ['LaTeX', 'OpenCV', 'MATLAB', 'SAS', 'Power BI', 'Microsoft Office'],
+            accent: 'bg-amber-500',
         },
     ],
     es: [
         {
             title: 'Lenguajes',
             items: ['Python', 'R', 'SQL', 'Fortran'],
+            accent: 'bg-blue-500',
         },
         {
             title: 'ML / Ciencia de Datos',
             items: ['NumPy', 'Pandas', 'scikit-learn', 'CatBoost', 'LightGBM', 'H2O AutoML', 'Optuna', 'PyTorch', 'TensorFlow', 'PySpark', 'pm4py', 'Matplotlib', 'Seaborn'],
+            accent: 'bg-violet-500',
         },
         {
             title: 'MLOps / Despliegue',
             items: ['MLflow', 'FastAPI', 'Git', 'Azure', 'Docker'],
+            accent: 'bg-emerald-500',
         },
         {
             title: 'Herramientas',
             items: ['LaTeX', 'OpenCV', 'MATLAB', 'SAS', 'Power BI', 'Microsoft Office'],
+            accent: 'bg-amber-500',
         },
     ],
 };
@@ -61,19 +69,23 @@ const Skills: React.FC = () => {
     }, []);
 
     return (
-        <section id="skills" className="py-24 border-t border-zinc-200 dark:border-zinc-800">
+        <section id="skills" className="py-24 border-t border-zinc-800">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div ref={revealRef} className="reveal">
-                    <h2 className="text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-50 mb-12">
+                    <h2 className="text-3xl font-mono font-bold text-zinc-50 mb-12">
                         {sectionTitles[language]}
                     </h2>
-                    <div className="space-y-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {skillCategories[language].map((category, idx) => (
-                            <div key={idx}>
-                                <p className="text-xs font-mono text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-3">
+                            <div
+                                key={idx}
+                                className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-5 hover:border-zinc-700 hover:bg-zinc-900 transition-all duration-300"
+                            >
+                                <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                    <span className={`w-1.5 h-1.5 rounded-full ${category.accent} flex-shrink-0`} aria-hidden="true" />
                                     {category.title}
                                 </p>
-                                <div className="flex flex-wrap gap-2">
+                                <div className="flex flex-wrap gap-1.5">
                                     {category.items.map((item, i) => (
                                         <span key={i} className="tag">
                                             {item}
