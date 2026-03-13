@@ -1,5 +1,25 @@
 import React, { useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import {
+    SiPython, SiReact, SiTypescript, SiTailwindcss, SiVite,
+    SiFastapi, SiSqlite, SiPytorch, SiMlflow, SiPandas, SiScikitlearn,
+} from 'react-icons/si';
+
+// Mapa de tecnología → icono Simple Icons
+// Las tecnologías sin icono se muestran solo como texto
+const techIcons: Record<string, React.ReactElement> = {
+    'Python':        <SiPython />,
+    'React 18':      <SiReact />,
+    'TypeScript':    <SiTypescript />,
+    'Tailwind CSS':  <SiTailwindcss />,
+    'Vite':          <SiVite />,
+    'FastAPI':       <SiFastapi />,
+    'SQLite':        <SiSqlite />,
+    'PyTorch':       <SiPytorch />,
+    'MLflow':        <SiMlflow />,
+    'Pandas':        <SiPandas />,
+    'scikit-learn':  <SiScikitlearn />,
+};
 
 interface Project {
     title: { en: string; es: string };
@@ -227,7 +247,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, language, l }) => {
             </div>
             <div className="mt-5 flex flex-wrap gap-1.5">
                 {project.technologies.map((tech, i) => (
-                    <span key={i} className="tag">{tech}</span>
+                    <span key={i} className="tag inline-flex items-center gap-1">
+                        {techIcons[tech] && (
+                            <span className="text-[0.75rem] opacity-70">{techIcons[tech]}</span>
+                        )}
+                        {tech}
+                    </span>
                 ))}
             </div>
         </div>

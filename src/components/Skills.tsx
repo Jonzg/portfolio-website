@@ -1,5 +1,28 @@
 import React, { useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import {
+    SiPython, SiR, SiNumpy, SiPandas, SiScikitlearn,
+    SiPytorch, SiTensorflow, SiApachespark,
+    SiMlflow, SiFastapi, SiGit, SiDocker,
+    SiLatex, SiOpencv,
+} from 'react-icons/si';
+
+const techIcons: Record<string, React.ReactElement> = {
+    'Python':       <SiPython />,
+    'R':            <SiR />,
+    'NumPy':        <SiNumpy />,
+    'Pandas':       <SiPandas />,
+    'scikit-learn': <SiScikitlearn />,
+    'PyTorch':      <SiPytorch />,
+    'TensorFlow':   <SiTensorflow />,
+    'PySpark':      <SiApachespark />,
+    'MLflow':       <SiMlflow />,
+    'FastAPI':      <SiFastapi />,
+    'Git':          <SiGit />,
+    'Docker':       <SiDocker />,
+    'LaTeX':        <SiLatex />,
+    'OpenCV':       <SiOpencv />,
+};
 
 const skillCategories = {
     en: [
@@ -87,7 +110,10 @@ const Skills: React.FC = () => {
                                 </p>
                                 <div className="flex flex-wrap gap-1.5">
                                     {category.items.map((item, i) => (
-                                        <span key={i} className="tag">
+                                        <span key={i} className="tag inline-flex items-center gap-1">
+                                            {techIcons[item] && (
+                                                <span className="text-[0.75rem] opacity-70">{techIcons[item]}</span>
+                                            )}
                                             {item}
                                         </span>
                                     ))}

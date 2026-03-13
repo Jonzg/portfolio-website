@@ -53,30 +53,42 @@ const educationData = {
 const coursesCerts = {
   en: [
     {
+      name: 'IBM Deep Learning with PyTorch, Keras and TensorFlow Professional Certificate',
+      org: 'Credly – IBM',
+      year: '2025',
+      link: 'https://www.credly.com/badges/94941a81-5ded-427a-87b8-1f8300d60ea2/linked_in_profile',
+    },
+    {
       name: 'Generative AI with Large Language Models',
       org: 'Coursera – AWS & DeepLearning.AI',
       year: '2025',
-      link: 'https://www.coursera.org/learn/generative-ai-with-llms/',
+      link: 'https://www.coursera.org/account/accomplishments/verify/OIT46V6MOSMO',
     },
     {
       name: 'Machine Learning in Production',
       org: 'Coursera – DeepLearning.AI',
       year: '2025',
-      link: 'https://www.coursera.org/learn/introduction-to-machine-learning-in-production/',
+      link: 'https://www.coursera.org/account/accomplishments/verify/8E5NRVWICSJL',
     },
   ],
   es: [
     {
-      name: 'IA Generativa con Modelos Grandes de Lenguaje (LLMs)',
+      name: 'IBM Deep Learning con PyTorch, Keras y TensorFlow — Certificado Profesional',
+      org: 'Credly – IBM',
+      year: '2025',
+      link: 'https://www.credly.com/badges/94941a81-5ded-427a-87b8-1f8300d60ea2/linked_in_profile',
+    },
+    {
+      name: 'IA Generativa con Grandes Modelos de Lenguaje',
       org: 'Coursera – AWS & DeepLearning.AI',
       year: '2025',
-      link: 'https://www.coursera.org/learn/generative-ai-with-llms/',
+      link: 'https://www.coursera.org/account/accomplishments/verify/OIT46V6MOSMO',
     },
     {
       name: 'Machine Learning en Producción',
       org: 'Coursera – DeepLearning.AI',
       year: '2025',
-      link: 'https://www.coursera.org/learn/introduction-to-machine-learning-in-production/',
+      link: 'https://www.coursera.org/account/accomplishments/verify/8E5NRVWICSJL',
     },
   ],
 };
