@@ -40,6 +40,10 @@ npm run dev
 
 Open your browser and navigate to `http://localhost:3000` to view the application.
 
+## Live Demo
+
+The portfolio is live at: https://jonzg.vercel.app/
+
 ## License
 
 This project is licensed under the MIT License.
