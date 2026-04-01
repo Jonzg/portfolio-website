@@ -30,12 +30,12 @@ const About: React.FC = () => {
 
     return (
         <section id="about" className="py-24 border-t border-zinc-800">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div ref={revealRef} className="reveal">
                     <h2 className="text-3xl font-mono font-bold text-zinc-50 mb-10">
                         {t.sectionTitle}
                     </h2>
-                    <p className="text-zinc-400 text-lg leading-relaxed max-w-2xl text-justify">
+                    <p className="text-zinc-400 text-lg leading-relaxed text-justify">
                         {t.body}
                     </p>
                 </div>

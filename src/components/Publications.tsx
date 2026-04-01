@@ -42,7 +42,7 @@ const Publications: React.FC = () => {
 
   return (
     <section id="publications" className="py-24 border-t border-zinc-800">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={revealRef} className="reveal">
           <h2 className="text-3xl font-mono font-bold text-zinc-50 mb-12">
             {l.sectionTitle}

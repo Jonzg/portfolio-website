@@ -4,11 +4,11 @@ import React, { useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 // Ajusta este valor para cambiar el tamaño de todos los logos (Tailwind w-/h-)
-const LOGO_SIZE = 'w-24 h-24';
+const LOGO_SIZE = 'w-32 h-32';
 
 // Logos de empresa — object-contain para normalizar tamaños
 const companyLogos: Record<string, { src: string; alt: string }> = {
-    'Ayesa': { src: '/images/i3b-ibermatica.jpg', alt: 'i3B Ibermática logo' },
+    'Ayesa': { src: '/images/i3b-ibermatica.png', alt: 'i3B Ibermática logo' },
     'Hubbell': { src: '/images/Hubbell.png', alt: 'Hubbell logo' },
     'EDP Energy': { src: '/images/Edp.png', alt: 'EDP Energy logo' },
 };
@@ -91,7 +91,7 @@ const Experience: React.FC = () => {
 
     return (
         <section id="experience" className="py-24 border-t border-zinc-800">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div ref={revealRef} className="reveal">
                     <h2 className="text-3xl font-mono font-bold text-zinc-50 mb-12">
                         {sectionTitles[language]}

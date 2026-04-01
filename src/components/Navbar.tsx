@@ -52,11 +52,12 @@ const Navbar: React.FC = () => {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex-shrink-0">
-                        <a
-                            href="#"
-                            className="text-xl font-mono font-bold text-zinc-900 dark:text-zinc-50 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
-                        >
-                            JZ
+                        <a href="#" aria-label="Inicio">
+                            <img
+                                src="/favicon.png"
+                                alt="Logo"
+                                className="h-24 w-auto opacity-90 hover:opacity-100 transition-opacity duration-300 -my-4"
+                            />
                         </a>
                     </div>
 
