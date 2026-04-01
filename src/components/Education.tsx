@@ -70,6 +70,36 @@ const coursesCerts = {
       year: '2025',
       link: 'https://www.coursera.org/account/accomplishments/verify/8E5NRVWICSJL',
     },
+    {
+      name: 'Introduction to Deep Learning & Neural Networks with Keras',
+      org: 'Coursera – IBM',
+      year: '2025',
+      link: '',
+    },
+    {
+      name: 'Deep Learning with Keras and TensorFlow',
+      org: 'Coursera – IBM',
+      year: '2025',
+      link: '',
+    },
+    {
+      name: 'Introduction to Neural Networks and PyTorch',
+      org: 'Coursera – IBM',
+      year: '2025',
+      link: '',
+    },
+    {
+      name: 'Deep Learning with PyTorch',
+      org: 'Coursera – IBM',
+      year: '2025',
+      link: '',
+    },
+    {
+      name: 'AI Capstone Project with Deep Learning',
+      org: 'Coursera – IBM',
+      year: '2025',
+      link: '',
+    },
   ],
   es: [
     {
@@ -89,6 +119,36 @@ const coursesCerts = {
       org: 'Coursera – DeepLearning.AI',
       year: '2025',
       link: 'https://www.coursera.org/account/accomplishments/verify/8E5NRVWICSJL',
+    },
+    {
+      name: 'Introducción al Deep Learning y Redes Neuronales con Keras',
+      org: 'Coursera – IBM',
+      year: '2025',
+      link: '',
+    },
+    {
+      name: 'Deep Learning con Keras y TensorFlow',
+      org: 'Coursera – IBM',
+      year: '2025',
+      link: '',
+    },
+    {
+      name: 'Introducción a las Redes Neuronales y PyTorch',
+      org: 'Coursera – IBM',
+      year: '2025',
+      link: '',
+    },
+    {
+      name: 'Deep Learning con PyTorch',
+      org: 'Coursera – IBM',
+      year: '2025',
+      link: '',
+    },
+    {
+      name: 'Proyecto Final de Deep Learning con IA',
+      org: 'Coursera – IBM',
+      year: '2025',
+      link: '',
     },
   ],
 };
@@ -173,14 +233,18 @@ const Education: React.FC = () => {
                 <li key={idx} className="flex flex-col sm:flex-row sm:items-baseline gap-1">
                   <span className="text-zinc-300 text-sm">{course.name}</span>
                   <span className="text-zinc-700 hidden sm:inline">·</span>
-                  <a
-                    href={course.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-400 hover:text-blue-300 text-sm transition-colors duration-200 cursor-pointer"
-                  >
-                    {course.org}
-                  </a>
+                  {course.link ? (
+                    <a
+                      href={course.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:text-blue-300 text-sm transition-colors duration-200 cursor-pointer"
+                    >
+                      {course.org}
+                    </a>
+                  ) : (
+                    <span className="text-zinc-500 text-sm">{course.org}</span>
+                  )}
                   <span className="text-zinc-600 text-xs font-mono">{course.year}</span>
                 </li>
               ))}

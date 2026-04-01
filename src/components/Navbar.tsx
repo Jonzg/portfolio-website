@@ -7,6 +7,7 @@ const menuLabels = {
         experience: 'Experience',
         education: 'Education',
         projects: 'Projects',
+        publications: 'Publications',
         contact: 'Contact',
     },
     es: {
@@ -14,6 +15,7 @@ const menuLabels = {
         experience: 'Experiencia',
         education: 'Formación',
         projects: 'Proyectos',
+        publications: 'Publicaciones',
         contact: 'Contacto',
     }
 };
@@ -27,6 +29,7 @@ const Navbar: React.FC = () => {
         { label: menuLabels[language].experience, href: '#experience' },
         { label: menuLabels[language].education, href: '#education' },
         { label: menuLabels[language].projects, href: '#projects' },
+        { label: menuLabels[language].publications, href: '#publications' },
         { label: menuLabels[language].contact, href: '#contact', isButton: true }
     ];
 

@@ -25,6 +25,7 @@ interface Project {
     title: { en: string; es: string };
     problem: { en: string; es: string };
     approach: { en: string; es: string };
+    bullets?: { en: string[]; es: string[] };
     technologies: string[];
     type: 'process-mining' | 'anomaly-detection' | 'classification' | 'mlops-api' | 'web-app' | 'quiz-app' | 'time-series';
     category: 'personal' | 'company';
@@ -83,6 +84,18 @@ const projects: Project[] = [
             en: 'ML regression pipeline (CatBoost, scikit-learn) with SHAP-based explainable AI to interpret model outputs. Results communicated to both technical teams and non-technical industrial stakeholders.',
             es: 'Pipeline de regresión ML (CatBoost, scikit-learn) con IA explicable basada en SHAP para interpretar los resultados del modelo. Hallazgos comunicados a equipos técnicos y perfiles no técnicos del sector industrial.',
         },
+        bullets: {
+            en: [
+                'Developed ML models to predict nickel concentration in industrial galvanisation baths.',
+                'Applied XAI techniques (SHAP) to interpret predictions and support process decisions.',
+                'Communicated findings to both engineering teams and non-technical industrial stakeholders.',
+            ],
+            es: [
+                'Desarrollo de modelos ML para predecir la concentración de níquel en baños de galvanizado industrial.',
+                'Aplicación de técnicas XAI (SHAP) para interpretar predicciones y apoyar decisiones de proceso.',
+                'Comunicación de resultados a equipos de ingeniería y perfiles no técnicos del sector industrial.',
+            ],
+        },
         technologies: ['Python', 'CatBoost', 'scikit-learn', 'SHAP', 'Pandas', 'Seaborn'],
         type: 'classification',
         category: 'company',
@@ -99,6 +112,18 @@ const projects: Project[] = [
         approach: {
             en: 'ML framework combining clustering (K-Means, DBSCAN), feature selection, anomaly detection and SHAP-based XAI. Clusters validated with Silhouette and Calinski-Harabasz indices.',
             es: 'Marco ML que combina clustering (K-Means, DBSCAN), selección de variables, detección de anomalías y XAI basado en SHAP. Clusters validados con índices Silhouette y Calinski-Harabasz.',
+        },
+        bullets: {
+            en: [
+                'Designed an end-to-end ML framework for early detection of deviations, delays, and bottlenecks.',
+                'Applied clustering, feature selection, anomaly detection, and XAI to optimise decision-making.',
+                'Integrated models into production environments within the AEC industry.',
+            ],
+            es: [
+                'Diseño de un framework ML completo para la detección temprana de desviaciones, retrasos y cuellos de botella.',
+                'Aplicación de clustering, selección de variables, detección de anomalías y XAI para optimizar la toma de decisiones.',
+                'Integración de los modelos en entornos de producción dentro de la industria AEC.',
+            ],
         },
         technologies: ['Python', 'scikit-learn', 'K-Means', 'DBSCAN', 'SHAP', 'Pandas'],
         type: 'anomaly-detection',
@@ -117,6 +142,20 @@ const projects: Project[] = [
             en: 'Binary classification with variable analysis, process mining with fitness/precision conformance metrics via PM4Py, experiment tracking with MLflow, and synthetic data generation with VAEs and GANs.',
             es: 'Clasificación binaria con análisis de variables, process mining con métricas de conformidad (fitness/precision) vía PM4Py, seguimiento de experimentos con MLflow y generación de datos sintéticos con VAEs y GANs.',
         },
+        bullets: {
+            en: [
+                'Binary classification and feature analysis for production quality prediction.',
+                'Process mining with conformance metrics (fitness, precision) and flow visualisation via PM4Py.',
+                'Built MLOps pipelines with MLflow for experiment tracking, model lifecycle automation, and hyperparameter tuning.',
+                'Generated synthetic data with VAEs and GANs to improve model robustness on imbalanced datasets.',
+            ],
+            es: [
+                'Clasificación binaria y análisis de variables para predicción de calidad en producción.',
+                'Process mining con métricas de conformidad (fitness, precision) y visualización de flujos con PM4Py.',
+                'Construcción de pipelines MLOps con MLflow para seguimiento de experimentos, automatización del ciclo de vida del modelo y ajuste de hiperparámetros.',
+                'Generación de datos sintéticos con VAEs y GANs para mejorar la robustez del modelo en conjuntos de datos desbalanceados.',
+            ],
+        },
         technologies: ['Python', 'pm4py', 'MLflow', 'PyTorch', 'scikit-learn', 'VAE / GAN', 'Pandas'],
         type: 'process-mining',
         category: 'company',
@@ -133,6 +172,20 @@ const projects: Project[] = [
         approach: {
             en: 'End-to-end pipeline: data cleaning, outlier detection, and comparative evaluation of ARIMA, Prophet and LSTM models. ML-based imputation of missing values in AMI infrastructure data.',
             es: 'Pipeline completo: limpieza de datos, detección de outliers y evaluación comparativa de modelos ARIMA, Prophet y LSTM. Imputación de valores faltantes con ML en datos de infraestructura AMI.',
+        },
+        bullets: {
+            en: [
+                'Data analysis, cleaning, and outlier detection on real smart meter (AMI) time series.',
+                'Comparative evaluation of ARIMA, Prophet, boosting models, and LSTM for energy forecasting.',
+                'ML-based imputation of missing values in electricity sector infrastructure data (Master\'s Thesis at Hubbell).',
+                'Contributed to the design of software components integrating predictive models into industrial systems, and to an MLOps architecture as the forecasting component owner.',
+            ],
+            es: [
+                'Análisis, limpieza y detección de outliers en series temporales reales de smart meters (AMI).',
+                'Evaluación comparativa de ARIMA, Prophet, modelos de boosting y LSTM para previsión energética.',
+                'Imputación de valores faltantes con ML en datos de infraestructura del sector eléctrico (TFM en Hubbell).',
+                'Contribución al diseño de componentes software que integran modelos predictivos en sistemas industriales, y a una arquitectura MLOps como responsable del componente de forecasting.',
+            ],
         },
         technologies: ['Python', 'ARIMA', 'Prophet', 'LSTM', 'PyTorch', 'scikit-learn', 'Pandas'],
         type: 'time-series',
@@ -244,6 +297,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, language, l }) => {
                     <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest mb-1">{l.approach}</p>
                     <p className="text-zinc-400 text-sm leading-relaxed">{project.approach[language]}</p>
                 </div>
+                {project.bullets && (
+                    <ul className="space-y-1 mt-1">
+                        {project.bullets[language].map((b, i) => (
+                            <li key={i} className="text-zinc-400 text-sm leading-relaxed before:content-['—'] before:mr-2 before:text-zinc-700">
+                                {b}
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </div>
             <div className="mt-5 flex flex-wrap gap-1.5">
                 {project.technologies.map((tech, i) => (
