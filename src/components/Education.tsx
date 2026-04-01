@@ -56,7 +56,7 @@ const coursesCerts = {
       name: 'AWS Certified AI Practitioner',
       org: 'Amazon Web Services (AWS)',
       year: '2026',
-      link: '',
+      link: 'https://www.credly.com/earner/earned/share/d242dc4b-28c5-4e09-b508-508bcf38234c',
     },
     {
       name: 'IBM Deep Learning with PyTorch, Keras and TensorFlow Professional Certificate',
@@ -82,7 +82,7 @@ const coursesCerts = {
       name: 'AWS Certified AI Practitioner',
       org: 'Amazon Web Services (AWS)',
       year: '2026',
-      link: '',
+      link: 'https://www.credly.com/earner/earned/share/d242dc4b-28c5-4e09-b508-508bcf38234c',
     },
     {
       name: 'IBM Deep Learning con PyTorch, Keras y TensorFlow — Certificado Profesional',
