@@ -53,6 +53,12 @@ const educationData = {
 const coursesCerts = {
   en: [
     {
+      name: 'AWS Certified AI Practitioner',
+      org: 'Amazon Web Services (AWS)',
+      year: '2026',
+      link: '',
+    },
+    {
       name: 'IBM Deep Learning with PyTorch, Keras and TensorFlow Professional Certificate',
       org: 'Credly – IBM',
       year: '2025',
@@ -69,9 +75,15 @@ const coursesCerts = {
       org: 'Coursera – DeepLearning.AI',
       year: '2025',
       link: 'https://www.coursera.org/account/accomplishments/verify/8E5NRVWICSJL',
-    }
+    },
   ],
   es: [
+    {
+      name: 'AWS Certified AI Practitioner',
+      org: 'Amazon Web Services (AWS)',
+      year: '2026',
+      link: '',
+    },
     {
       name: 'IBM Deep Learning con PyTorch, Keras y TensorFlow — Certificado Profesional',
       org: 'Credly – IBM',
@@ -89,7 +101,7 @@ const coursesCerts = {
       org: 'Coursera – DeepLearning.AI',
       year: '2025',
       link: 'https://www.coursera.org/account/accomplishments/verify/8E5NRVWICSJL',
-    }
+    },
   ],
 };
 
