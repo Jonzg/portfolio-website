@@ -27,9 +27,9 @@ const Navbar: React.FC = () => {
     const menuItems = [
         { label: menuLabels[language].about, href: '#about' },
         { label: menuLabels[language].experience, href: '#experience' },
-        { label: menuLabels[language].education, href: '#education' },
         { label: menuLabels[language].projects, href: '#projects' },
         { label: menuLabels[language].publications, href: '#publications' },
+        { label: menuLabels[language].education, href: '#education' },
         { label: menuLabels[language].contact, href: '#contact', isButton: true }
     ];
 

@@ -69,37 +69,7 @@ const coursesCerts = {
       org: 'Coursera – DeepLearning.AI',
       year: '2025',
       link: 'https://www.coursera.org/account/accomplishments/verify/8E5NRVWICSJL',
-    },
-    {
-      name: 'Introduction to Deep Learning & Neural Networks with Keras',
-      org: 'Coursera – IBM',
-      year: '2025',
-      link: '',
-    },
-    {
-      name: 'Deep Learning with Keras and TensorFlow',
-      org: 'Coursera – IBM',
-      year: '2025',
-      link: '',
-    },
-    {
-      name: 'Introduction to Neural Networks and PyTorch',
-      org: 'Coursera – IBM',
-      year: '2025',
-      link: '',
-    },
-    {
-      name: 'Deep Learning with PyTorch',
-      org: 'Coursera – IBM',
-      year: '2025',
-      link: '',
-    },
-    {
-      name: 'AI Capstone Project with Deep Learning',
-      org: 'Coursera – IBM',
-      year: '2025',
-      link: '',
-    },
+    }
   ],
   es: [
     {
@@ -119,37 +89,7 @@ const coursesCerts = {
       org: 'Coursera – DeepLearning.AI',
       year: '2025',
       link: 'https://www.coursera.org/account/accomplishments/verify/8E5NRVWICSJL',
-    },
-    {
-      name: 'Introducción al Deep Learning y Redes Neuronales con Keras',
-      org: 'Coursera – IBM',
-      year: '2025',
-      link: '',
-    },
-    {
-      name: 'Deep Learning con Keras y TensorFlow',
-      org: 'Coursera – IBM',
-      year: '2025',
-      link: '',
-    },
-    {
-      name: 'Introducción a las Redes Neuronales y PyTorch',
-      org: 'Coursera – IBM',
-      year: '2025',
-      link: '',
-    },
-    {
-      name: 'Deep Learning con PyTorch',
-      org: 'Coursera – IBM',
-      year: '2025',
-      link: '',
-    },
-    {
-      name: 'Proyecto Final de Deep Learning con IA',
-      org: 'Coursera – IBM',
-      year: '2025',
-      link: '',
-    },
+    }
   ],
 };
 
