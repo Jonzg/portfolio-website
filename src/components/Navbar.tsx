@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
 
                         {/* Language Switcher */}
                         <button
-                            className="ml-1 px-3 py-1 rounded border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-300 text-xs font-mono hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-300"
+                            className="ml-1 px-3 py-1 rounded border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-300 text-xs font-mono hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer"
                             onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
                             aria-label="Cambiar idioma"
                         >
@@ -89,7 +89,7 @@ const Navbar: React.FC = () => {
                     {/* Mobile controls */}
                     <div className="md:hidden flex items-center gap-2">
                         <button
-                            className="px-3 py-1 rounded border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-300 text-xs font-mono transition-colors duration-300"
+                            className="px-3 py-1 rounded border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-300 text-xs font-mono transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer"
                             onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
                             aria-label="Cambiar idioma"
                         >

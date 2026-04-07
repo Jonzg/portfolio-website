@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import { motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
 import {
     SiPython, SiReact, SiTypescript, SiTailwindcss, SiVite,
@@ -256,22 +257,25 @@ interface ProjectCardProps {
     project: Project;
     language: 'en' | 'es';
     l: typeof labels['en'];
+    index: number;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, language, l }) => {
+const ProjectCard: React.FC<ProjectCardProps & { index: number }> = ({ project, language, l, index }) => {
     const cfg = typeConfig[project.type];
     return (
-        <div
-            className={`group bg-zinc-900/50 border border-zinc-800 border-l-4 ${cfg.accent} rounded-lg p-6 flex flex-col hover:bg-zinc-900 hover:border-zinc-700 hover:shadow-xl hover:shadow-zinc-950/50 transition-all duration-300`}
+        <motion.div
+            className={`group bg-zinc-900/50 border border-zinc-800 border-l-4 ${cfg.accent} rounded-lg p-6 flex flex-col`}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.45, ease: 'easeOut', delay: (index % 2) * 0.12 }}
+            whileHover={{ y: -3, boxShadow: '0 20px 40px rgba(0,0,0,0.4)', transition: { duration: 0.2 } }}
         >
             <div className="flex items-start justify-between gap-3 mb-4">
                 <span className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono border ${cfg.badge}`}>
                     {cfg.label[language]}
                 </span>
-                {project.category === 'company' ? (
-                    <span className="text-xs font-mono text-zinc-600 border border-zinc-800 rounded px-2 py-0.5">
-                    </span>
-                ) : (
+                {project.category === 'company' ? null : (
                     <a
                         href={project.githubUrl}
                         target="_blank"
@@ -317,25 +321,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, language, l }) => {
                     </span>
                 ))}
             </div>
-        </div>
+        </motion.div>
     );
 };
 
 const Projects: React.FC = () => {
     const { language } = useLanguage();
     const l = labels[language];
-    const revealRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const el = revealRef.current;
-        if (!el) return;
-        const observer = new IntersectionObserver(
-            ([entry]) => { if (entry.isIntersecting) el.classList.add('visible'); },
-            { threshold: 0.05 }
-        );
-        observer.observe(el);
-        return () => observer.disconnect();
-    }, []);
 
     const personalProjects = projects.filter(p => p.category === 'personal');
     const companyProjects = projects.filter(p => p.category === 'company');
@@ -343,30 +335,34 @@ const Projects: React.FC = () => {
     return (
         <section id="projects" className="py-24 border-t border-zinc-800">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div ref={revealRef} className="reveal">
-                    <h2 className="text-3xl font-mono font-bold text-zinc-50 mb-12">
-                        {l.sectionTitle}
-                    </h2>
+                <motion.h2
+                    className="text-3xl font-mono font-bold text-zinc-50 mb-12"
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                >
+                    {l.sectionTitle}
+                </motion.h2>
 
-                    {/* Proyectos personales */}
-                    <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6">
-                        {l.personalTitle}
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-                        {personalProjects.map((project, index) => (
-                            <ProjectCard key={index} project={project} language={language} l={l} />
-                        ))}
-                    </div>
+                {/* Proyectos personales */}
+                <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6">
+                    {l.personalTitle}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+                    {personalProjects.map((project, index) => (
+                        <ProjectCard key={index} project={project} language={language} l={l} index={index} />
+                    ))}
+                </div>
 
-                    {/* Proyectos empresariales */}
-                    <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6">
-                        {l.companyTitle}
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {companyProjects.map((project, index) => (
-                            <ProjectCard key={index} project={project} language={language} l={l} />
-                        ))}
-                    </div>
+                {/* Proyectos empresariales */}
+                <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6">
+                    {l.companyTitle}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {companyProjects.map((project, index) => (
+                        <ProjectCard key={index} project={project} language={language} l={l} index={index} />
+                    ))}
                 </div>
             </div>
         </section>

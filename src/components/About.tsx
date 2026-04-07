@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import { motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
 
 const aboutTexts = {
@@ -15,30 +16,23 @@ const aboutTexts = {
 const About: React.FC = () => {
     const { language } = useLanguage();
     const t = aboutTexts[language];
-    const revealRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const el = revealRef.current;
-        if (!el) return;
-        const observer = new IntersectionObserver(
-            ([entry]) => { if (entry.isIntersecting) el.classList.add('visible'); },
-            { threshold: 0.1 }
-        );
-        observer.observe(el);
-        return () => observer.disconnect();
-    }, []);
 
     return (
         <section id="about" className="py-24 border-t border-zinc-800">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div ref={revealRef} className="reveal">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    transition={{ duration: 0.55, ease: 'easeOut' }}
+                >
                     <h2 className="text-3xl font-mono font-bold text-zinc-50 mb-10">
                         {t.sectionTitle}
                     </h2>
                     <p className="text-zinc-400 text-lg leading-relaxed text-justify">
                         {t.body}
                     </p>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

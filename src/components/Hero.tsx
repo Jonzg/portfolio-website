@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import { motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
 
 const heroTexts = {
@@ -20,17 +21,23 @@ const heroTexts = {
     }
 };
 
+/* Variantes de animación para el hero */
+const container = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
+};
+const item = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+const photoVariant = {
+    hidden: { opacity: 0, x: -24 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+};
+
 const Hero: React.FC = () => {
     const { language } = useLanguage();
     const t = heroTexts[language];
-    const revealRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const el = revealRef.current;
-        if (!el) return;
-        const timer = setTimeout(() => el.classList.add('visible'), 100);
-        return () => clearTimeout(timer);
-    }, []);
 
     return (
         <section className="relative flex flex-col items-center justify-center min-h-screen px-6 pt-16 overflow-hidden">
@@ -43,47 +50,57 @@ const Hero: React.FC = () => {
                 aria-hidden="true"
             />
 
-            <div ref={revealRef} className="reveal relative w-full max-w-5xl mx-auto">
+            <div className="relative w-full max-w-5xl mx-auto">
                 {/* Layout: foto izquierda + texto derecha en desktop, columna en móvil */}
                 <div className="flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-16">
 
                     {/* Foto de perfil — izquierda */}
-                    <div className="flex-shrink-0">
+                    <motion.div
+                        className="flex-shrink-0"
+                        variants={photoVariant}
+                        initial="hidden"
+                        animate="visible"
+                    >
                         <img
                             src="/Jon.jpg"
                             alt="Jon Zorrilla Gamboa"
                             className="w-56 h-80 md:w-64 md:h-96 rounded-xl object-cover object-top border border-zinc-800 shadow-xl"
                         />
-                    </div>
+                    </motion.div>
 
-                    {/* Texto — derecha */}
-                    <div className="flex flex-col gap-5 text-left">
+                    {/* Texto — derecha con stagger */}
+                    <motion.div
+                        className="flex flex-col gap-5 text-left"
+                        variants={container}
+                        initial="hidden"
+                        animate="visible"
+                    >
                         {/* Status badge */}
-                        <div className="inline-flex items-center gap-2 text-xs font-mono text-zinc-400 border border-zinc-800 rounded-full px-3.5 py-1.5 w-fit hover:border-zinc-600 transition-colors duration-300 cursor-default">
+                        <motion.div variants={item} className="inline-flex items-center gap-2 text-xs font-mono text-zinc-400 border border-zinc-800 rounded-full px-3.5 py-1.5 w-fit hover:border-zinc-600 transition-colors duration-300 cursor-default">
                             <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true" />
                             {t.status}
-                        </div>
+                        </motion.div>
 
                         {/* Name */}
-                        <p className="text-xs font-mono text-blue-500 tracking-[0.25em] uppercase select-none">
+                        <motion.p variants={item} className="text-xs font-mono text-blue-500 tracking-[0.25em] uppercase select-none">
                             Jon Zorrilla Gamboa
-                        </p>
+                        </motion.p>
 
                         {/* Title */}
-                        <h1 className="text-4xl md:text-6xl font-mono font-bold text-zinc-50 leading-[1.05] tracking-tight whitespace-pre-line">
+                        <motion.h1 variants={item} className="text-4xl md:text-6xl font-mono font-bold text-zinc-50 leading-[1.05] tracking-tight whitespace-pre-line">
                             {t.title}
-                        </h1>
+                        </motion.h1>
 
                         {/* Tagline */}
-                        <p className="text-base md:text-lg text-zinc-400 max-w-xl leading-relaxed">
+                        <motion.p variants={item} className="text-base md:text-lg text-zinc-400 max-w-xl leading-relaxed">
                             {t.tagline}
-                        </p>
+                        </motion.p>
 
                         {/* CTAs */}
-                        <div className="flex flex-wrap gap-3 pt-1">
+                        <motion.div variants={item} className="flex flex-wrap gap-3 pt-1">
                             <a
                                 href="#projects"
-                                className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-500 transition-colors duration-200 cursor-pointer"
+                                className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-500 transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                             >
                                 {t.viewProjects}
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -92,7 +109,7 @@ const Hero: React.FC = () => {
                             </a>
                             <a
                                 href="#contact"
-                                className="px-6 py-2.5 border border-zinc-700 text-zinc-300 text-sm font-medium rounded-lg hover:border-zinc-500 hover:text-zinc-50 transition-colors duration-200 cursor-pointer"
+                                className="px-6 py-2.5 border border-zinc-700 text-zinc-300 text-sm font-medium rounded-lg hover:border-zinc-500 hover:text-zinc-50 transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                             >
                                 {t.contact}
                             </a>
@@ -107,8 +124,8 @@ const Hero: React.FC = () => {
                                 </svg>
                                 {t.downloadCV}
                             </a>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
                 </div>
             </div>
         </section>

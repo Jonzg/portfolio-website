@@ -1,10 +1,11 @@
 // src/components/Experience.tsx
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import { motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
 
 // Ajusta este valor para cambiar el tamaño de todos los logos (Tailwind w-/h-)
-const LOGO_SIZE = 'w-32 h-32';
+const LOGO_SIZE = 'w-24 h-24';
 
 // Logos de empresa — object-contain para normalizar tamaños
 const companyLogos: Record<string, { src: string; alt: string }> = {
@@ -76,66 +77,66 @@ const sectionTitles = {
 const Experience: React.FC = () => {
     const { language } = useLanguage();
     const experiences = experienceData[language];
-    const revealRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const el = revealRef.current;
-        if (!el) return;
-        const observer = new IntersectionObserver(
-            ([entry]) => { if (entry.isIntersecting) el.classList.add('visible'); },
-            { threshold: 0.05 }
-        );
-        observer.observe(el);
-        return () => observer.disconnect();
-    }, []);
 
     return (
         <section id="experience" className="py-24 border-t border-zinc-800">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div ref={revealRef} className="reveal">
-                    <h2 className="text-3xl font-mono font-bold text-zinc-50 mb-12">
-                        {sectionTitles[language]}
-                    </h2>
-                    <div className="space-y-4">
-                        {experiences.map((exp, index) => {
-                            const logo = companyLogos[exp.company];
-                            return (
-                                <div key={index} className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:border-zinc-700 hover:bg-zinc-900 transition-all duration-300">
-                                    <div className="flex items-start gap-4">
-                                        {/* Logo badge */}
-                                        {logo && (
-                                            <div className={`${LOGO_SIZE} flex-shrink-0 overflow-hidden`}>
-                                                <img src={logo.src} alt={logo.alt} className="w-full h-full object-contain" />
-                                            </div>
-                                        )}
-                                        <div className="flex-1 min-w-0">
-                                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-1.5">
-                                                <h3 className="text-zinc-50 font-semibold leading-snug">{exp.position}</h3>
-                                                <span className="text-xs font-mono text-zinc-500 whitespace-nowrap">{exp.years}</span>
-                                            </div>
-                                            <div className="flex items-center gap-2 mb-3">
-                                                <a
-                                                    href={exp.linkedin}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors duration-200 cursor-pointer"
-                                                >
-                                                    {exp.company}
-                                                </a>
-                                                {exp.location && (
-                                                    <>
-                                                        <span className="text-zinc-700">·</span>
-                                                        <span className="text-zinc-500 text-sm">{exp.location}</span>
-                                                    </>
-                                                )}
-                                            </div>
-                                            <p className="text-zinc-400 text-sm leading-relaxed">{exp.description}</p>
+                <motion.h2
+                    className="text-3xl font-mono font-bold text-zinc-50 mb-12"
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                >
+                    {sectionTitles[language]}
+                </motion.h2>
+                <div className="space-y-4">
+                    {experiences.map((exp, index) => {
+                        const logo = companyLogos[exp.company];
+                        return (
+                            <motion.div
+                                key={index}
+                                className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:border-zinc-700 hover:bg-zinc-900 transition-colors duration-300"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: '-40px' }}
+                                transition={{ duration: 0.45, ease: 'easeOut', delay: index * 0.1 }}
+                                whileHover={{ y: -2, transition: { duration: 0.2 } }}
+                            >
+                                <div className="flex items-start gap-4">
+                                    {/* Logo badge */}
+                                    {logo && (
+                                        <div className={`${LOGO_SIZE} flex-shrink-0 overflow-hidden`}>
+                                            <img src={logo.src} alt={logo.alt} className="w-full h-full object-contain" />
                                         </div>
+                                    )}
+                                    <div className="flex-1 min-w-0">
+                                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-1.5">
+                                            <h3 className="text-zinc-50 font-semibold leading-snug">{exp.position}</h3>
+                                            <span className="text-xs font-mono text-zinc-500 whitespace-nowrap">{exp.years}</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <a
+                                                href={exp.linkedin}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors duration-200 cursor-pointer"
+                                            >
+                                                {exp.company}
+                                            </a>
+                                            {exp.location && (
+                                                <>
+                                                    <span className="text-zinc-700">·</span>
+                                                    <span className="text-zinc-500 text-sm">{exp.location}</span>
+                                                </>
+                                            )}
+                                        </div>
+                                        <p className="text-zinc-400 text-sm leading-relaxed">{exp.description}</p>
                                     </div>
                                 </div>
-                            );
-                        })}
-                    </div>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </section>
