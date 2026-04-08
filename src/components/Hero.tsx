@@ -9,6 +9,7 @@ const heroTexts = {
         tagline: 'End-to-end: ETL, predictive modelling, deployment & applied research.',
         viewProjects: 'View Projects',
         contact: 'Contact',
+        downloadCV: 'Download CV',
     },
     es: {
         status: 'Disponible para nuevas oportunidades',
@@ -16,6 +17,7 @@ const heroTexts = {
         tagline: 'De extremo a extremo: ETL, modelado predictivo, despliegue y research aplicado.',
         viewProjects: 'Ver Proyectos',
         contact: 'Contacto',
+        downloadCV: 'Descargar CV',
     }
 };
 
@@ -110,6 +112,17 @@ const Hero: React.FC = () => {
                                 className="px-6 py-2.5 border border-zinc-700 text-zinc-300 text-sm font-medium rounded-lg hover:border-zinc-500 hover:text-zinc-50 transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                             >
                                 {t.contact}
+                            </a>
+                            <a
+                                href={language === 'en' ? '/CV_jz_en.pdf' : '/CV_jz_es.pdf'}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-6 py-2.5 border border-zinc-800 text-zinc-500 text-sm font-medium rounded-lg hover:border-zinc-600 hover:text-zinc-300 transition-colors duration-200 cursor-pointer"
+                            >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                                </svg>
+                                {t.downloadCV}
                             </a>
                         </motion.div>
                     </motion.div>
