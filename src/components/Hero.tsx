@@ -41,9 +41,13 @@ const Hero: React.FC = () => {
 
     return (
         <section className="relative flex flex-col items-center justify-center min-h-screen px-6 pt-16 overflow-hidden">
-            {/* Dot grid background */}
-            <div className="dot-grid absolute inset-0 pointer-events-none" aria-hidden="true" />
-            {/* Radial fade mask */}
+            {/* Imagen de fondo plexus */}
+            <div
+                className="absolute inset-0 pointer-events-none"
+                style={{ backgroundImage: 'url(/Fondo-portfolio.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.5 }}
+                aria-hidden="true"
+            />
+            {/* Radial fade mask para fundir bordes con el fondo */}
             <div
                 className="absolute inset-0 pointer-events-none"
                 style={{ background: 'radial-gradient(ellipse 70% 60% at 50% 50%, transparent 0%, #09090b 100%)' }}
