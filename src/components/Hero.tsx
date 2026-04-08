@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
             {/* Imagen de fondo plexus */}
             <div
                 className="absolute inset-0 pointer-events-none"
-                style={{ backgroundImage: 'url(/Fondo-portfolio.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.5 }}
+                style={{ backgroundImage: 'url(/Fondo-portfolio.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 1, mixBlendMode: 'screen' }}
                 aria-hidden="true"
             />
             {/* Radial fade mask para fundir bordes con el fondo */}
