@@ -9,7 +9,7 @@ const heroTexts = {
         tagline: 'End-to-end: ETL, predictive modelling, deployment & applied research.',
         viewProjects: 'View Projects',
         contact: 'Contact',
-        downloadCV: 'Download CV',
+        // downloadCV: 'Download CV',
     },
     es: {
         status: 'Disponible para nuevas oportunidades',
@@ -17,7 +17,7 @@ const heroTexts = {
         tagline: 'De extremo a extremo: ETL, modelado predictivo, despliegue y research aplicado.',
         viewProjects: 'Ver Proyectos',
         contact: 'Contacto',
-        downloadCV: 'Descargar CV',
+        // downloadCV: 'Descargar CV',
     }
 };
 
@@ -113,7 +113,7 @@ const Hero: React.FC = () => {
                             >
                                 {t.contact}
                             </a>
-                            <a
+                            {/* <a
                                 href={language === 'en' ? '/CV_jz_en.pdf' : '/CV_jz_es.pdf'}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -123,7 +123,7 @@ const Hero: React.FC = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                                 </svg>
                                 {t.downloadCV}
-                            </a>
+                            </a> */}
                         </motion.div>
                     </motion.div>
                 </div>
