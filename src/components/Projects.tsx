@@ -194,41 +194,48 @@ const projects: Project[] = [
     },
 ];
 
-const typeConfig: Record<Project['type'], { label: { en: string; es: string }; badge: string; accent: string }> = {
+const typeConfig: Record<Project['type'], { label: { en: string; es: string }; badge: string; accent: string; hoverShadow: string }> = {
     'process-mining': {
         label: { en: 'Process Mining', es: 'Process Mining' },
         badge: 'text-violet-400 bg-violet-950/60 border-violet-800/60',
         accent: 'border-l-violet-500',
+        hoverShadow: '0 20px 40px rgba(139, 92, 246, 0.18), 0 0 0 1px rgba(139, 92, 246, 0.15)',
     },
     'anomaly-detection': {
         label: { en: 'Anomaly Detection', es: 'Detección de Anomalías' },
         badge: 'text-amber-400 bg-amber-950/60 border-amber-800/60',
         accent: 'border-l-amber-500',
+        hoverShadow: '0 20px 40px rgba(245, 158, 11, 0.18), 0 0 0 1px rgba(245, 158, 11, 0.15)',
     },
     'classification': {
         label: { en: 'Classification', es: 'Clasificación' },
         badge: 'text-blue-400 bg-blue-950/60 border-blue-800/60',
         accent: 'border-l-blue-500',
+        hoverShadow: '0 20px 40px rgba(59, 130, 246, 0.18), 0 0 0 1px rgba(59, 130, 246, 0.15)',
     },
     'mlops-api': {
         label: { en: 'MLOps / API', es: 'MLOps / API' },
         badge: 'text-emerald-400 bg-emerald-950/60 border-emerald-800/60',
         accent: 'border-l-emerald-500',
+        hoverShadow: '0 20px 40px rgba(16, 185, 129, 0.18), 0 0 0 1px rgba(16, 185, 129, 0.15)',
     },
     'time-series': {
         label: { en: 'Time Series', es: 'Series Temporales' },
         badge: 'text-cyan-400 bg-cyan-950/60 border-cyan-800/60',
         accent: 'border-l-cyan-500',
+        hoverShadow: '0 20px 40px rgba(6, 182, 212, 0.18), 0 0 0 1px rgba(6, 182, 212, 0.15)',
     },
     'web-app': {
         label: { en: 'Web App', es: 'Aplicación Web' },
         badge: 'text-blue-400 bg-blue-950/60 border-blue-800/60',
         accent: 'border-l-blue-500',
+        hoverShadow: '0 20px 40px rgba(59, 130, 246, 0.18), 0 0 0 1px rgba(59, 130, 246, 0.15)',
     },
     'quiz-app': {
         label: { en: 'Quiz App', es: 'Quiz App' },
         badge: 'text-amber-400 bg-amber-950/60 border-amber-800/60',
         accent: 'border-l-amber-500',
+        hoverShadow: '0 20px 40px rgba(245, 158, 11, 0.18), 0 0 0 1px rgba(245, 158, 11, 0.15)',
     },
 };
 
@@ -269,7 +276,7 @@ const ProjectCard: React.FC<ProjectCardProps & { index: number }> = ({ project, 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.45, ease: 'easeOut', delay: (index % 2) * 0.12 }}
-            whileHover={{ y: -3, boxShadow: '0 20px 40px rgba(0,0,0,0.4)', transition: { duration: 0.2 } }}
+            whileHover={{ y: -4, boxShadow: cfg.hoverShadow, transition: { duration: 0.2 } }}
         >
             <div className="flex items-start justify-between gap-3 mb-4">
                 <span className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono border ${cfg.badge}`}>
